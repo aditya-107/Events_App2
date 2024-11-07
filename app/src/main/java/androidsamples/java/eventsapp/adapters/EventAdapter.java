@@ -1,19 +1,22 @@
+// EventAdapter.java
 package androidsamples.java.eventsapp.adapters;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import java.util.List;
 import androidsamples.java.eventsapp.R;
-import androidsamples.java.eventsapp.activites.EventDetailActivity;
+import androidsamples.java.eventsapp.models.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
+
+    private List<Event> eventList;
+
+    public EventAdapter(List<Event> eventList) {
+        this.eventList = eventList;
+    }
 
     @NonNull
     @Override
@@ -24,24 +27,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        holder.btnViewDetails.setOnClickListener(v -> {
-            Context context = v.getContext();
-            Intent intent = new Intent(context, EventDetailActivity.class);
-            context.startActivity(intent);
-        });
+        // Bind event data to the view holder
     }
 
     @Override
     public int getItemCount() {
-        return 10; // Sample data count
+        return eventList.size();
     }
 
     static class EventViewHolder extends RecyclerView.ViewHolder {
-        Button btnViewDetails;
-
-        EventViewHolder(@NonNull View itemView) {
+        public EventViewHolder(@NonNull View itemView) {
             super(itemView);
-            btnViewDetails = itemView.findViewById(R.id.btn_view_details);
+            // Initialize view elements
         }
     }
 }
