@@ -11,8 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidsamples.java.eventsapp.R;
 import androidsamples.java.eventsapp.adapters.EventAdapter;
+import androidsamples.java.eventsapp.models.Event;
 
 public class EventsFragment extends Fragment {
 
@@ -22,7 +26,11 @@ public class EventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_events);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new EventAdapter());
+
+        // Initialize an empty list of events
+        List<Event> eventList = new ArrayList<>();
+        recyclerView.setAdapter(new EventAdapter(eventList));
+
         return view;
     }
 }

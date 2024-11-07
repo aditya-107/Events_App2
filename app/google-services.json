@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562651820104",
+    "project_id": "hackathon-f7624",
+    "storage_bucket": "hackathon-f7624.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562651820104:android:c0272e34a6ad0e5021287d",
+        "android_client_info": {
+          "package_name": "androidsamples.java.eventsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_u_MMeon3dyZ2-Xr99TP0IxdXCpN_GHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
