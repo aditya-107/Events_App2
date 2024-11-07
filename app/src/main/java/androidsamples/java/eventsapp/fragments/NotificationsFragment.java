@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-import androidsamples.java.eventapp.R;
-import androidsamples.java.eventapp.adapters.NotificationAdapter;
+import androidsamples.java.eventsapp.R;
+import androidsamples.java.eventsapp.adapters.NotificationAdapter;
 
 public class NotificationsFragment extends Fragment {
 

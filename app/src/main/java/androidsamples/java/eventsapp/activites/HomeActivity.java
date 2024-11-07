@@ -13,9 +13,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidsamples.java.eventapp.R;
-import androidsamples.java.eventapp.adapters.EventAdapter;
-import androidsamples.java.eventapp.models.Event;
+import androidsamples.java.eventsapp.R;
+import androidsamples.java.eventsapp.adapters.EventAdapter;
+import androidsamples.java.eventsapp.models.Event;
 
 public class HomeActivity extends AppCompatActivity {
 

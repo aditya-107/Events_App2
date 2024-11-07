@@ -10,7 +10,7 @@ import androidx.core.app.NotificationManagerCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import androidsamples.java.eventapp.R;
+import androidsamples.java.eventsapp.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

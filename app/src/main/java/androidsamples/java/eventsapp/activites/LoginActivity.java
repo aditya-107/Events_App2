@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import androidsamples.java.eventapp.R;
+import androidsamples.java.eventsapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 

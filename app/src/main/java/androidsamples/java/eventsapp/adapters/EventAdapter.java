@@ -10,8 +10,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import androidsamples.java.eventapp.R;
-import androidsamples.java.eventapp.activites.EventDetailActivity;
+import androidsamples.java.eventsapp.R;
+import androidsamples.java.eventsapp.activites.EventDetailActivity;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 

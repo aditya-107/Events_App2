@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidsamples.java.eventapp.R;
+import androidsamples.java.eventsapp.R;
 
 public class AdminDashboardActivity extends AppCompatActivity {
 

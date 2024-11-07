@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import androidsamples.java.eventapp.R;
-import androidsamples.java.eventapp.models.Event;
+import androidsamples.java.eventsapp.R;
+import androidsamples.java.eventsapp.models.Event;
 
 public class CreateEventActivity extends AppCompatActivity {
 

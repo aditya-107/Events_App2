@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidsamples.java.eventapp.R;
+import androidsamples.java.eventsapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
