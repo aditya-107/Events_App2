@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import androidsamples.java.eventapp.R;
-import androidsamples.java.eventapp.adapters.EventAdapter;
+import androidsamples.java.eventsapp.R;
+import androidsamples.java.eventsapp.adapters.EventAdapter;
 
 public class EventsFragment extends Fragment {
 
