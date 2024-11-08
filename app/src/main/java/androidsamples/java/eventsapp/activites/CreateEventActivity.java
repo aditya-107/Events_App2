@@ -1,20 +1,24 @@
 package androidsamples.java.eventsapp.activites;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import androidsamples.java.eventsapp.R;
-import androidsamples.java.eventsapp.models.Event;
 
 public class CreateEventActivity extends AppCompatActivity {
 
-    private static final String TAG = "CreateEventActivity";
+    private EditText etEventName;
+    private EditText etEventDescription;
+    private Button btnCreateEvent;
     private FirebaseFirestore db;
 
     @Override
@@ -22,23 +26,29 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
+        etEventName = findViewById(R.id.et_event_name);
+        etEventDescription = findViewById(R.id.et_event_description);
+        btnCreateEvent = findViewById(R.id.btn_create_event);
         db = FirebaseFirestore.getInstance();
 
-        EditText etEventName = findViewById(R.id.et_event_name);
-        EditText etEventDescription = findViewById(R.id.et_event_description);
-        Button btnSaveEvent = findViewById(R.id.btn_save_event);
-
-        btnSaveEvent.setOnClickListener(v -> {
+        btnCreateEvent.setOnClickListener(v -> {
             String eventName = etEventName.getText().toString();
             String eventDescription = etEventDescription.getText().toString();
-            saveEvent(eventName, eventDescription);
+            createEvent(eventName, eventDescription);
         });
     }
 
-    private void saveEvent(String eventName, String eventDescription) {
-        Event event = new Event(eventName, eventDescription, "2023-10-10");
-        db.collection("events").add(event)
-                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+    private void createEvent(String name, String description) {
+        Map<String, Object> event = new HashMap<>();
+        event.put("name", name);
+        event.put("description", description);
+
+        db.collection("events")
+                .add(event)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(CreateEventActivity.this, "Event created successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> Toast.makeText(CreateEventActivity.this, "Error creating event", Toast.LENGTH_SHORT).show());
     }
 }

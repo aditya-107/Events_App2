@@ -1,34 +1,33 @@
-// HomeActivity.java
 package androidsamples.java.eventsapp.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import androidsamples.java.eventsapp.R;
-import androidsamples.java.eventsapp.adapters.EventAdapter;
-import androidsamples.java.eventsapp.models.Event;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private FirebaseFirestore db;
-    private RecyclerView recyclerView;
-    private EventAdapter eventAdapter;
-    private List<Event> eventList;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        db = FirebaseFirestore.getInstance();
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        // Initialize eventList with data
-        eventAdapter = new EventAdapter(eventList);
-        recyclerView.setAdapter(eventAdapter);
+        if (currentUser == null) {
+            // User is not logged in, redirect to RegisterActivity
+            Intent intent = new Intent(HomeActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            // User is logged in, proceed with HomeActivity
+            // Your existing code for HomeActivity
+        }
     }
 }

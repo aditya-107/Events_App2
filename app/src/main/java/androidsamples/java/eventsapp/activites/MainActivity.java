@@ -31,5 +31,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AdminDashboardActivity.class);
             startActivity(intent);
         });
+
+        Button btnRegister = findViewById(R.id.btn_register);
+        btnRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
     }
 }

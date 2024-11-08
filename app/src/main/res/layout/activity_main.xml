@@ -7,25 +7,39 @@
     android:layout_height="match_parent"
     tools:context=".activites.MainActivity">
 
+
     <Button
         android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/btn_admin_dashboard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
         android:text="Admin Dashboard"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="228dp"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_admin_dashboard"
+        app:layout_constraintWidth_percent="0.8" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

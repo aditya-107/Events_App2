@@ -46,6 +46,17 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".activites.RegisterActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".activites.ManageEventsActivity"
+            android:exported="true">
+        </activity>
+
+
+
     </application>
 
 </manifest>

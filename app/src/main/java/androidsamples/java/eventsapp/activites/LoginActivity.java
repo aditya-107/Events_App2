@@ -10,15 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidsamples.java.eventsapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
 
     private EditText etUsername;
     private EditText etPassword;
@@ -30,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
 
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
@@ -49,20 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            db.collection("users").document(user.getUid()).get()
-                                    .addOnCompleteListener(task1 -> {
-                                        if (task1.isSuccessful()) {
-                                            DocumentSnapshot document = task1.getResult();
-                                            if (document.exists()) {
-                                                String role = document.getString("role");
-                                                navigateToMain(role);
-                                            } else {
-                                                Toast.makeText(LoginActivity.this, "No such document", Toast.LENGTH_SHORT).show();
-                                            }
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "Get failed with " + task1.getException(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                            navigateToMain();
                         }
                     } else {
                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -70,13 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void navigateToMain(String role) {
-        Intent intent;
-        if ("admin".equals(role)) {
-            intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-        } else {
-            intent = new Intent(LoginActivity.this, HomeActivity.class);
-        }
+    private void navigateToMain() {
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
