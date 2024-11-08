@@ -3,9 +3,7 @@ package androidsamples.java.eventsapp.activites;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidsamples.java.eventsapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,12 +27,6 @@ public class MainActivity extends AppCompatActivity {
         btnAdminDashboard.setOnClickListener(v -> {
             // Navigate to Admin Dashboard
             Intent intent = new Intent(MainActivity.this, AdminDashboardActivity.class);
-            startActivity(intent);
-        });
-
-        Button btnRegister = findViewById(R.id.btn_register);
-        btnRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
     }
