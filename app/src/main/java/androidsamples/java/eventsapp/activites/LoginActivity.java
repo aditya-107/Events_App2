@@ -2,57 +2,36 @@ package androidsamples.java.eventsapp.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import androidsamples.java.eventsapp.R;
-import androidsamples.java.eventsapp.activites.HomeActivity;
-import androidsamples.java.eventsapp.activites.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText mUsernameEditText;
-    private EditText mPasswordEditText;
-    private Button mLoginButton;
-    private TextView mRegisterTextView;
     private FirebaseAuth mAuth;
+    private EditText etUsername;
+    private EditText etPassword;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mUsernameEditText = findViewById(R.id.editTextUsername);
-        mPasswordEditText = findViewById(R.id.editTextPassword);
-        mLoginButton = findViewById(R.id.buttonLogin);
-        mRegisterTextView = findViewById(R.id.textViewRegister);
         mAuth = FirebaseAuth.getInstance();
+        etUsername = findViewById(R.id.editTextUsername);
+        etPassword = findViewById(R.id.editTextPassword);
+        btnLogin = findViewById(R.id.buttonLogin);
 
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = mUsernameEditText.getText().toString();
-                String password = mPasswordEditText.getText().toString();
-
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please enter both username and password", Toast.LENGTH_SHORT).show();
-                } else {
-                    loginUser(username, password);
-                }
-            }
-        });
-
-        mRegisterTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        btnLogin.setOnClickListener(v -> {
+            String email = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            loginUser(email, password);
         });
     }
 
@@ -62,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            navigateToMain();
+                            determineUserType(user.getUid());
                         }
                     } else {
                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -70,9 +49,31 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void navigateToMain() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+    private void determineUserType(String userId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                String userType = task.getResult().getString("userType");
+                if (userType != null) {
+                    switch (userType) {
+                        case "student":
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            break;
+                        case "societySecretary":
+                            startActivity(new Intent(LoginActivity.this, SocietySecretaryActivity.class));
+                            break;
+                        case "admin":
+                            startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
+                            break;
+                        default:
+                            // Handle unknown user type
+                            break;
+                    }
+                    finish();
+                }
+            } else {
+                // Handle error
+            }
+        });
     }
 }
