@@ -1,33 +1,29 @@
 package androidsamples.java.eventsapp.activites;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
+import androidx.viewpager2.widget.ViewPager2;
+import java.util.ArrayList;
+import java.util.List;
 import androidsamples.java.eventsapp.R;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    private ViewPager2 viewPager;
+    private ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        viewPager = findViewById(R.id.viewPager);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
 
-        if (currentUser == null) {
-            // User is not logged in, redirect to RegisterActivity
-            Intent intent = new Intent(HomeActivity.this, RegisterActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            // User is logged in, proceed with HomeActivity
-            // Your existing code for HomeActivity
-        }
+        // Add fragments to the adapter
+        adapter.addFragment(new FirstFragment());
+        adapter.addFragment(new SecondFragment());
+
+        viewPager.setAdapter(adapter);
     }
 }
